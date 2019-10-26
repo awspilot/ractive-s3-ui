@@ -112,7 +112,7 @@ var _ractive2 = _interopRequireDefault(_ractive);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _ractive2.default.extend({
-	template: { v: 4, t: [] },
+	template: { v: 4, t: [" this is s3 ui "] },
 	components: {},
 	css: "",
 	data: function data() {
@@ -120,16 +120,14 @@ exports.default = _ractive2.default.extend({
 	},
 	on: {
 		init: function init() {
-
-			// ddb = new AWS.DynamoDB({
-			// 	endpoint: this.get('endpoint'),
-			// 	region: this.get('region'),
-			// 	credentials: {
-			// 		accessKeyId: this.get('accessKeyId'),
-			// 		secretAccessKey: this.get('secretAccessKey'),
-			// 	}
-			// });
-
+			s3 = new AWS.S3({
+				endpoint: this.get('endpoint'),
+				region: this.get('region'),
+				credentials: {
+					accessKeyId: this.get('accessKeyId'),
+					secretAccessKey: this.get('secretAccessKey')
+				}
+			});
 		}
 	}
 });

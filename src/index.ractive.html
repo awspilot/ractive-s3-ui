@@ -2,7 +2,7 @@
 
 </style>
 
-
+this is s3 ui
 
 <script>
 
@@ -19,17 +19,14 @@
 		},
 		on: {
 			init: function() {
-
-
-				// ddb = new AWS.DynamoDB({
-				// 	endpoint: this.get('endpoint'),
-				// 	region: this.get('region'),
-				// 	credentials: {
-				// 		accessKeyId: this.get('accessKeyId'),
-				// 		secretAccessKey: this.get('secretAccessKey'),
-				// 	}
-				// });
-
+				s3 = new AWS.S3({
+					endpoint: this.get('endpoint'),
+					region: this.get('region'),
+					credentials: {
+						accessKeyId: this.get('accessKeyId'),
+						secretAccessKey: this.get('secretAccessKey'),
+					}
+				});
 			}
 		},
 	});
