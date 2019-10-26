@@ -109,14 +109,22 @@ var _ractive = __webpack_require__(1);
 
 var _ractive2 = _interopRequireDefault(_ractive);
 
+var _bucketlistRactive = __webpack_require__(2);
+
+var _bucketlistRactive2 = _interopRequireDefault(_bucketlistRactive);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _ractive2.default.extend({
-	template: { v: 4, t: [" this is s3 ui "] },
-	components: {},
+	template: { v: 4, t: [{ t: 7, e: "bucketlist" }] },
+	components: {
+		bucketlist: _bucketlistRactive2.default
+	},
 	css: "",
 	data: function data() {
-		return {};
+		return {
+			page: 'bucketlist'
+		};
 	},
 	on: {
 		init: function init() {
@@ -137,6 +145,24 @@ exports.default = _ractive2.default.extend({
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE__1__;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = Ractive.extend({
+	template: { v: 4, t: [" bucket list "] },
+	css: "",
+	data: function data() {
+		return {};
+	}
+});
 
 /***/ })
 /******/ ])["default"];

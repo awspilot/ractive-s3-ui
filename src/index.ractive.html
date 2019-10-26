@@ -2,20 +2,23 @@
 
 </style>
 
-this is s3 ui
+<bucketlist />
 
 <script>
 
 	import Ractive from 'ractive';
-
+	import bucketlist from './bucketlist.ractive.html';
 
 	export default Ractive.extend({
 		template: $TEMPLATE,
 		components: {
+			bucketlist: bucketlist,
 		},
 		css: $CSS,
 		data: function() {
-			return {}
+			return {
+				page: 'bucketlist',
+			}
 		},
 		on: {
 			init: function() {
