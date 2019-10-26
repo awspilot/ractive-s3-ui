@@ -4,7 +4,7 @@
 	"description": "ractivejs component to manage S3 Buckets",
 	"main": "dist/ractive-s3-ui.min.js",
 	"scripts": {
-		"start": "webpack -w & node_modules/node-static/bin/cli.js -p 8881",
+		"start": "webpack -w & node_modules/node-static/bin/cli.js -p 9991",
 		"build": "webpack",
 		"watch": "webpack --config webpack.config.js --watch"
 	},
