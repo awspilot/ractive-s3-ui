@@ -12,7 +12,7 @@
 		components: {
 			bucketlist: bucketlist,
 		},
-		css: $CSS,
+
 		data: function() {
 			return {
 				page: 'bucketlist',
