@@ -18,8 +18,8 @@ module.exports = {
 	plugins: [
 	],
 	entry: {
-		'ractive-s3-ui': path.resolve(__dirname, './src/index.ractive.html'),
-		'ractive-s3-ui.min': path.resolve(__dirname, './src/index.ractive.html')
+		'ractive-s3-ui': path.resolve(__dirname, './src/index.js'),
+		'ractive-s3-ui.min': path.resolve(__dirname, './src/index.js')
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -43,22 +43,10 @@ module.exports = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /(node_modules|bower_components)/,
+				exclude: /node_modules/,
 				use: 'babel-loader'
 			},
-			{
-					test: /\.ractive\.html$/,
-					use: 'babel-loader'
-			},
-			{
-				test: /\.ractive\.html$/,
-				exclude: /(node_modules|bower_components)/,
-				use: [
-					{
-						loader: 'ractive-bin-loader'
-					}
-				]
-			}
+
 		]
 	}
 }
