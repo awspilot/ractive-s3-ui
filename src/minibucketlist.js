@@ -21,7 +21,7 @@ export default Ractive.extend({
 		<scrollarea class='scrollarea miniheaderbody' style='position: absolute;'>
 		<tables>
 			{{#buckets}}
-			<div on-click='@this.fire( "open-bucket",.)'> {{.Name}} </div>
+			<div on-click='open-bucket'> {{.Name}} </div>
 			{{/buckets}}
 		</tables>
 		</scrollarea>
@@ -45,13 +45,14 @@ export default Ractive.extend({
 	on: {
 		init() {
 			this.refresh_buckets()
-			// var ractive = this
-			// ractive.on('open-bucket', function(e, table ) {
-			// 	ractive.parent.fire('open-table', table )
-			// })
-			// ractive.on('create', function() {
-			// 	ractive.root.findComponent('tabs').newtab('tablecreate', 'Create Table' )
-			// })
+			var ractive = this
+			ractive.on('open-bucket', function(e, bucket ) {
+				var bucket = this.get( e.resolve() )
+				ractive.parent.fire('open-bucket', bucket.Name )
+			})
+			ractive.on('create', function() {
+				ractive.root.findComponent('tabs').newtab('bucketcreate', 'Create Bucket' )
+			})
 		},
 	},
 })
