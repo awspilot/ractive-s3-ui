@@ -1,6 +1,6 @@
 
 
-<script>
+
 
 	import Ractive from 'ractive';
 	import bucketlist from './bucketlist';
@@ -42,4 +42,3 @@
 			}
 		},
 	});
-</script>
