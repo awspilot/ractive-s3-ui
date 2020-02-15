@@ -4,9 +4,9 @@
 	"description": "ractivejs component to manage S3 Buckets",
 	"main": "dist/ractive-s3-ui.min.js",
 	"scripts": {
-		"start": "webpack -w & node_modules/node-static/bin/cli.js -p 9991",
-		"build": "webpack",
-		"watch": "webpack --config webpack.config.js --watch"
+		"dev": "docker run -it --rm -v $PWD:/usr/share/nginx/html -p 9991:80 nginx",
+		"start": "webpack -w --config webpack.config.js",
+		"build": "webpack --config webpack.config.js"
 	},
 	"repository": {
 		"type": "git",
