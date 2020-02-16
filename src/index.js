@@ -34,6 +34,9 @@
 				<split />
 				<content>
 					<tabs
+
+						accessKeyId={{accessKeyId}} secretAccessKey={{secretAccessKey}}
+
 						active_id='buckets'
 						theme={{theme}}
 					/>
@@ -58,7 +61,6 @@
 
 				s3 = new AWS.S3({
 					//endpoint: this.get('endpoint') || undefined,
-					endpoint: 'http://localhost:8080',
 
 					region: this.get('region'),
 					credentials: {
@@ -66,14 +68,11 @@
 						secretAccessKey: this.get('secretAccessKey'),
 					},
 
-					sslEnabled: false,
-					s3ForcePathStyle: true,
-					signatureVersion: 'v2',
+					//sslEnabled: false,
+					s3ForcePathStyle: true, // location wont work othewise, for local
+					//signatureVersion: 'v2',
 
 				});
-
-				//console.log(this.get('region'), this.get('accessKeyId'), this.get('secretAccessKey') )
-
 
 			}
 		},
