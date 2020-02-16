@@ -1,18 +1,19 @@
 
 import tabledata from './tabledata';
-import {IconRefresh} from './svgicons';
+import {IconRefresh, IconTrash } from './svgicons';
 
 export default Ractive.extend({
 	components: {
 		tabledata: tabledata,
 
 		'icon-refresh': IconRefresh,
+		'icon-trash': IconTrash,
 	},
 	template: `
 
 		<div class='pull-right' style='padding: 7px;'>
 			<a class='btn btn-xs btn-primary ' on-click='create'> CREATE BUCKET </a>
-			<!-- <a class='btn btn-xs btn-default {{#if selection_length > 0}}{{else}}disabled{{/if}}' on-click='delete'> <icon-trash /> </a> -->
+			<a class='btn btn-xs btn-default {{#if selection_length === 1}}{{else}}disabled{{/if}}' on-click='delete'> <icon-trash /> </a>
 			<a class='btn btn-xs btn-default {{#if refresh_tables }}disabled{{/if}}' on-click='@this.refresh_buckets()'> <icon-refresh /> </a>
 		</div>
 
@@ -165,6 +166,9 @@ export default Ractive.extend({
 	},
 	data: function() {
 		return {
+			selection_length: 0,
+
+
 			columns: [
 				null,
 				"Bucket name",
@@ -188,6 +192,51 @@ export default Ractive.extend({
 			console.log('open-item', item.Name  )
 			this.root.findComponent('tabs').newtab('buckettab', item.Name )
 		},
+
+		'tabledata.selectrow': function(context) {
+
+			var keypath = context.resolve()
+			this.set(keypath + '.0.selected', !this.get(keypath + '.0.selected') )
+
+			this.set('selection_length',
+				this.get('rows').filter(function(r) { return r[0].selected === true } ).length
+			)
+		},
+
+		delete() {
+
+			var ractive=this;
+
+			var selected = this.get('rows').filter(function(r) { return r[0].selected === true } );
+
+			if ( selected.length === 0 )
+				return alert('Please select a bucket to delete')
+
+			if ( selected.length > 1 )
+				return alert('Please select one bucket at a time')
+
+			var bucketname = selected[0][1].HASH
+
+			if (confirm('Are you sure you want to delete bucket ' + bucketname )) {
+				var params = {
+					Bucket: bucketname
+				};
+				s3.deleteBucket(params, function(err, data) {
+					if (err)
+						return alert('Delete bucket failed')
+
+					ractive.refresh_buckets()
+
+				});
+			}
+
+
+
+
+		},
+
+
+
 
 	}
 })
