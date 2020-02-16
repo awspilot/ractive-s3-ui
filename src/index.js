@@ -28,11 +28,16 @@
 				<WindowContainer theme={{theme}} />
 			</div>
 			<hsplit class='ractive-s3-ui theme-{{theme}}'>
+
+				{{#if no_leftside}}
+				{{else}}
 				<left>
 					<minibucketlist />
 				</left>
 				<split />
-				<content>
+				{{/if}}
+
+				<content style="left: 0px;">
 					<tabs
 
 						accessKeyId={{accessKeyId}} secretAccessKey={{secretAccessKey}}
@@ -47,7 +52,7 @@
 
 		data: function() {
 			return {
-
+				no_leftside: true,
 			}
 		},
 		on: {
