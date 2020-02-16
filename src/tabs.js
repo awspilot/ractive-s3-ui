@@ -17,7 +17,7 @@ export default Ractive.extend({
 		`
 		<tabhead>
 			<tab class='{{#if active_id === "buckets" }}active{{/if}}' on-click='@this.fire("activetab", "buckets")'>
-				<icon-s3-bucket style="width: 20px;height: 20px;" />
+				<icon-s3-bucket style="width: 16px;height: 16px;" />
 			</tab>
 		{{#tabs}}
 			{{#if .closed !== true}}
