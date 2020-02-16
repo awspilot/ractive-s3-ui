@@ -41,7 +41,7 @@ export default Ractive.extend({
 						{{/if}}
 						{{#if .type === 'buckettab' }}
 							<buckettab
-								table={{.}}
+								bucket={{.}}
 								active={{ .id === active_id  }}
 								theme={{~/theme}}
 							/>
@@ -57,7 +57,7 @@ export default Ractive.extend({
 		var ractive = this
 		ractive.active_cache.push(ractive.get('active_id'))
 		ractive.findAllComponents('buckettab').map(function( tableview_c ) {
-			tableview_c.set('active', tableview_c.get('table.id') === ractive.get('active_id') )
+			tableview_c.set('active', tableview_c.get('bucket.id') === ractive.get('active_id') )
 		})
 	},
 	newtab: function(component_name, param1 ) {
