@@ -30,7 +30,7 @@ export default Ractive.extend({
 		</tabhead>
 		<tabcontent>
 			{{#if active_id === "buckets" }}
-				<bucketlistfull accessKeyId={{accessKeyId}} secretAccessKey={{secretAccessKey}} />
+				<bucketlistfull accessKeyId={{accessKeyId}} secretAccessKey={{secretAccessKey}} endpoint={{endpoint}} />
 			{{else}}
 				{{#tabs}}
 					{{#if .closed === true}}
