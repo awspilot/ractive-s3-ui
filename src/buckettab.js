@@ -1,4 +1,10 @@
+
+import BucketBrowser from './bucket/browser';
+
 export default Ractive.extend({
+	components: {
+		BucketBrowser: BucketBrowser,
+	},
 	template: `
 
 	<div class='tableview {{#if active}}active{{/if}}'>
@@ -10,26 +16,30 @@ export default Ractive.extend({
 			<a class='btn-tableview-tab {{#if tab === 'access_points'}}active{{/if}}' on-click='@this.set('tab','access_points')'> Access points </a>
 		</div>
 		<div style='position: absolute;top: 40px;left: 30px;right: 30px;bottom: 2px;'>
-			<br>
+
 
 			{{#if tab === 'info'}}
-				Overview {{bucket.name}}
+				<BucketBrowser bucket={{bucket.name}} />
 			{{/if}}
 
 			{{#if tab === 'properties'}}
+				<br>
 				Properties {{bucket.name}}
 			{{/if}}
 
 			{{#if tab === 'permissions'}}
+				<br>
 				Permissions {{bucket.name}}
 			{{/if}}
 
 			{{#if tab === 'management'}}
+				<br>
 				Management {{bucket.name}}
 			{{/if}}
 
 
 			{{#if tab === 'access_points'}}
+				<br>
 				Access points {{bucket.name}}
 			{{/if}}
 
