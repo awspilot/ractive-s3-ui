@@ -26,7 +26,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].js',
-		library: 'ractive-s3-ui',
+		library: '@awspilot/ractive-s3-ui',
 
 		// var, this, window, umd
 		libraryTarget: 'umd',
