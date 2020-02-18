@@ -3,29 +3,124 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.css" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/async/3.1.0/async.js"></script>
-		<!--<script src="js/jquery.js"></script>-->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.543.0/aws-sdk.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/ractive/1.3.8/ractive.min.js"></script>
+		<link rel="stylesheet" href="../dist/ractive-s3-ui.css" />
+
+		<script src="js/async.js"></script>
+		<script src="js/aws-sdk-2.552.0.min.js"></script>
+		<script src="js/ractive-1.3.8.js"></script>
 		<script src="../dist/ractive-s3-ui.js"></script>
+		<style>
+			body {background-color: #9694ff;font-family: sans-serif;color: #18169a;}
+			.demo-left {position: absolute;top: 50px;left: 30px;width: 210px;bottom: 50px;}
+			.demo-left label {display: block;color: #18169a;font-size: 13px;font-weight: bold;margin-top: 15px;}
+			.demo-left input[type=text] {box-sizing: border-box;padding: 5px;border: 1px solid #18169a;width: 100%;}
+			.demo-left select {box-sizing: border-box;width: 100%;padding: 5px;border-radius: 0px;height: 25px;border: 1px solid #18169a;-webkit-appearance: none;}
+			.demo-left select {
+				-webkit-border-radius: 0;
+				background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='%23444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
+				background-position: 100% 50%;
+				background-repeat: no-repeat;
+			}
+
+			.demo-right {position: absolute;top: 50px;left: 260px;right: 50px;bottom: 50px;}
+		</style>
 	</head>
 	<body>
 	</body>
 	<script>
-
-
 		var s3;
-		Ractive.components['s3ui'] = window['ractive-s3-ui'];
-
 		var ractive = new Ractive({
 			el: 'body',
+			data: function() {
+				return {
+					theme: 'windows',
+					connection: {
+						region: 'us-east-1',
+						endpoint: 'https://djaorxfotj9hr.cloudfront.net/v1/s3',
+						accessKeyId: 'myKeyId',
+						secretAccessKey: 'topsecret',
+
+					},
+					is_changing: false,
+				}
+			},
 			components: {
+				's3-ui': window['@awspilot/ractive-s3-ui'],
 			},
 			template: `
-				<s3ui region="us-east-1" accessKeyId="myKeyId" secretAccessKey="y"  />
-			`
+
+				<div class="demo-left">
+
+
+					<label>Theme</label>
+					<select value={{theme}}>
+
+						<option value="aws">AWS</option>
+
+						<option value="windows">Windows Classic</option>
+
+						<option value="atomdark">Atom Dark</option>
+						<option value="atomlight">Atom Light</option>
+
+					</select>
+
+					<label>Endpoint</label>
+					<input type=text value={{connection.endpoint}} />
+
+					<label>Region</label>
+
+					<select value={{connection.region}}>
+						<option value="us-east-1">US East (N. Virginia)</option>
+						<option value="us-east-2">US East (Ohio)</option>
+						<option value="us-west-1">US West (N. California)</option>
+						<option value="us-west-2">US West (Oregon)</option>
+						<option value="ap-south-1">Asia Pacific (Mumbai)</option>
+						<option value="ap-northeast-2">Asia Pacific (Seoul)</option>
+						<option value="ap-southeast-1">Asia Pacific (Singapore)</option>
+						<option value="ap-southeast-2">Asia Pacific (Sydney)</option>
+						<option value="ap-northeast-1">Asia Pacific (Tokyo)</option>
+						<option value="ca-central-1">Canada (Central)</option>
+						<option value="eu-central-1">EU (Frankfurt)</option>
+						<option value="eu-west-1">EU (Ireland)</option>
+						<option value="eu-west-2">EU (London)</option>
+						<option value="eu-west-3">EU (Paris)</option>
+						<option value="eu-north-1">EU (Stockholm)</option>
+						<option value="sa-east-1">South America (Sao Paulo)</option>
+					</select>
+
+					<label>AccessKeyId</label>
+					<input type=text value={{connection.accessKeyId}} />
+
+					<label>SecretAccessKeys</label>
+					<input type=text value={{connection.secretAccessKey}} />
+
+				</div>
+				<div class="demo-right">
+					{{#if is_changing}}
+					{{else}}
+					<s3-ui
+						theme={{theme}}
+
+						endpoint={{connection.endpoint}}
+
+						region={{connection.region}}
+						accessKeyId={{connection.accessKeyId}}
+						secretAccessKey={{connection.secretAccessKey}}
+					/>
+					{{/if}}
+				</div>
+			`,
+			on: {
+				init: function() {
+					var ractive=this;
+					this.observe('connection', function() {
+						ractive.set({is_changing: true,})
+						setTimeout(function() {
+							ractive.set({is_changing: false,})
+						},500)
+					}, {init: false,})
+				}
+			},
 		})
 	</script>
 </html>
