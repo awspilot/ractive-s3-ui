@@ -40,7 +40,9 @@
 				<content style="left: 0px;">
 					<tabs
 
-						accessKeyId={{accessKeyId}} secretAccessKey={{secretAccessKey}}
+						endpoint={{endpoint}}
+						accessKeyId={{accessKeyId}}
+						secretAccessKey={{secretAccessKey}}
 
 						active_id='buckets'
 						theme={{theme}}
@@ -65,7 +67,7 @@
 
 
 				s3 = new AWS.S3({
-					//endpoint: this.get('endpoint') || undefined,
+					endpoint: this.get('endpoint') || undefined,
 
 					region: this.get('region'),
 					credentials: {
