@@ -1,6 +1,6 @@
 {
 	"name": "@awspilot/ractive-s3-ui",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"description": "ractivejs component to manage S3 Buckets",
 	"main": "dist/ractive-s3-ui.min.js",
 	"scripts": {
